@@ -22,7 +22,7 @@ def get_categorical_variables(df):
 
     for i in range(len(values)):
         next_delta = values[i+1] - values[i] / values[i] #measure the increase in value
-        if next_delta > 20:
+        if next_delta > delta_limit:
             return df[keys[:i+1]]
 
 
