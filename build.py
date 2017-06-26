@@ -1,11 +1,29 @@
+from __future__ import division
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+import operator
 
 
 def get_categorical_variables(df):
+    '''Extract the categorical values from a DataFrame'''
+    keys = []
+    values = []
+    dic1 = {}
+    delta_limit = 20
+    #Store the column names sorted by their unique value counts in a list.
+    #Store the sorted values in a list
+    for col in list(df.columns):
+        dic1[col] = len(df[col].unique())
+    dic1 = sorted(dic1.items(), key=operator.itemgetter(1))
+    for k,v in dic1:
+        keys.append(k)
+        values.append(v)
 
-    return df.iloc[:,[0, 2, 3, 5]]
+    for i in range(len(values)):
+        next_delta = values[i+1] - values[i] / values[i] #measure the increase in value
+        if next_delta > 20:
+            return df[keys[:i+1]]
 
 
 def get_numerical_variables(df):
