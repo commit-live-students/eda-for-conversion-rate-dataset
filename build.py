@@ -1,10 +1,30 @@
 import pandas as pd
+import operator
 def load_data():
     df = pd.read_csv("./data/conversion_data.csv")
     return df
 
 def get_categorical_variables(df):
-    return df[['country','new_user','source','converted']]
+    #return df[['country','new_user','source','converted']]
+    key = []
+    values = []
+    dic = {}
+    delta_limit = 20
+
+    for cols in list(df.columns):
+        dic[cols] = len(df[cols].unique())
+
+    dic_sorted = sorted(dic.items(), key=operator.itemgetter(1))
+
+    for k,v in dic_sorted:
+        key.append(k)
+        values.append(v)
+
+    for i in range(len(values)-1):
+        next_delta = values[i+1] - values[i] / values[i] #measure the increase in value
+
+        if next_delta > delta_limit:
+            return df[key[:i+1]]
 
 
 def get_numerical_variables(df):
@@ -34,5 +54,5 @@ def plot_facet_box(df):
     pass
 
 df = load_data()
-get_missing_values_count(df)
+get_categorical_variables(df)
 #get_numerical_variables_percentile(df)
