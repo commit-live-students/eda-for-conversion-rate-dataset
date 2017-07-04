@@ -1,21 +1,24 @@
+import pandas as pd
+
 def get_categorical_variables(df):
-    return []
+    categorical_data = list(df[['country', 'new_user', 'source', 'converted']])
+    return categorical_data
 
 
 def get_numerical_variables(df):
-    return []
+    numerical_data = list(df[['age', 'total_pages_visited']])
+    return numerical_data
 
 
 def get_numerical_variables_percentile(df):
-    pass
+    return df.describe()
 
 
 def get_categorical_variables_modes(df):
-    pass
-
+    return df[get_categorical_variables(df)].mode()
 
 def get_missing_values_count(df):
-    pass
+    return pd.DataFrame(df.isnull().sum())
 
 
 def plot_histogram_with_numerical_values(df):
