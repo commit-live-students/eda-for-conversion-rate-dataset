@@ -24,6 +24,8 @@ def get_missing_values_count(df):
 def plot_histogram_with_numerical_values(df):
     plt.hist(df['age'], color='r', bins=50)
     plt.hist(df['total_pages_visited'], color='b', bins=50)
+    plt.xlabel('age')
+    plt.ylabel('total_pages_visited')
     plt.show()
 
 
