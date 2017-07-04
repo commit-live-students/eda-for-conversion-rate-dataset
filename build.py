@@ -22,7 +22,9 @@ def get_missing_values_count(df):
 
 
 def plot_histogram_with_numerical_values(df):
-    pass
+    plt.hist(df['age'], color='r', bins=50)
+    plt.hist(df['total_pages_visited'], color='b', bins=50)
+    plt.show()
 
 
 def plot_facet_box(df):
