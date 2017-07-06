@@ -45,4 +45,9 @@ def plot_histogram_with_numerical_values(df):
 
 
 def plot_facet_box(df):
-    pass
+    plt.figure(figsize=(10,5))
+    plt.subplot(121)
+    sns.boxplot('converted', 'age', data=df)
+    plt.subplot(122)
+    sns.boxplot('converted', 'total_pages_visited', data=df)
+    plt.tight_layout()
