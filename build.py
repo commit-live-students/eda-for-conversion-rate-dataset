@@ -58,4 +58,3 @@ def plot_facet_box(df):
         plt.boxplot(df[col])
         plt.title(col)
         plt.show()
-print plot_facet_box(get_categorical_variables(df))
